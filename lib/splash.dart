@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacementNamed(context, "/onboarding");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +28,10 @@ class SplashScreen extends StatelessWidget {
             Image.asset('assets/images/logo.png', height: 120),
             const SizedBox(height: 20),
             const Text(
-              "HUNGRY HUB",
+              "HUNGER HUB",
               style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w900,
+                fontSize: 30,
+                fontWeight: FontWeight.w700,
                 color: Colors.black,
                 letterSpacing: 2,
               ),
