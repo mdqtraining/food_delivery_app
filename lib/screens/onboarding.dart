@@ -36,7 +36,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      Navigator.pushReplacementNamed(context, '/home');
+      Navigator.pushReplacementNamed(context, '/login');
     }
   }
 
@@ -52,7 +52,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               alignment: Alignment.topRight,
               child: TextButton(
                 onPressed: () =>
-                    Navigator.pushReplacementNamed(context, "/home"),
+                    Navigator.pushReplacementNamed(context, "/login"),
                 child: const Text("Skip"),
               ),
             ),

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   bool hidePass = true;
+  bool hideConfirmPass = true;
 
   Widget inputField(String hint, {bool obscure = false, Widget? suffix}) {
     return TextField(
@@ -26,27 +27,25 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Title Sign In
               const Text(
-                "Sign In",
+                "Sign Up",
                 style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
               ),
 
               const SizedBox(height: 30),
 
-              // Email Input
-              inputField("Email"),
-
+              inputField("Name"),
               const SizedBox(height: 18),
 
-              // Password field
+              inputField("Email"),
+              const SizedBox(height: 18),
+
               inputField(
                 "Password",
                 obscure: hidePass,
@@ -57,68 +56,54 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () => setState(() => hidePass = !hidePass),
                 ),
               ),
+              const SizedBox(height: 18),
 
-              const SizedBox(height: 10),
-
-              // Forgot password
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "Forgot password?",
-                    style: TextStyle(color: Colors.black54),
+              inputField(
+                "Confirm Password",
+                obscure: hideConfirmPass,
+                suffix: IconButton(
+                  icon: Icon(
+                    hideConfirmPass ? Icons.visibility_off : Icons.visibility,
                   ),
+                  onPressed: () =>
+                      setState(() => hideConfirmPass = !hideConfirmPass),
                 ),
               ),
 
-              const SizedBox(height: 10),
+              const SizedBox(height: 18),
 
-              // Login Button
               SizedBox(
                 width: double.infinity,
                 height: 48,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/otp"); // 🔥 HERE OTP OPENS
+                  },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFFFA000),
+                    backgroundColor: Color(0xFFFFA000),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  child: const Text("SIGN IN", style: TextStyle(fontSize: 16)),
+                  child: const Text("SIGN UP", style: TextStyle(fontSize: 16)),
                 ),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 18),
 
-              // OR Divider
-              Row(
-                children: const [
-                  Expanded(child: Divider(thickness: 1)),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text("or"),
-                  ),
-                  Expanded(child: Divider(thickness: 1)),
-                ],
-              ),
-
-              // Signup link
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Don’t have an account? ",
+                    "Already have an account? ",
                     style: TextStyle(fontSize: 14),
                   ),
                   GestureDetector(
                     onTap: () =>
-                        Navigator.pushReplacementNamed(context, "/signup"),
+                        Navigator.pushReplacementNamed(context, "/login"),
                     child: const Text(
-                      "Sign Up",
+                      "Sign In",
                       style: TextStyle(
-                        fontSize: 14,
                         color: Color(0xFFFFA000),
                         fontWeight: FontWeight.w600,
                       ),
