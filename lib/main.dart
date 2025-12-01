@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hunger_hub/screens/login.dart';
 import 'package:hunger_hub/screens/otp.dart';
 import 'package:hunger_hub/screens/signup.dart';
+import 'package:hunger_hub/screens/forgot_password.dart';
 import 'package:hunger_hub/splash.dart';
 import 'screens/onboarding.dart';
 
@@ -29,6 +30,8 @@ class MyApp extends StatelessWidget {
         "/login": (context) => const LoginScreen(),
         "/signup": (context) => const SignupScreen(),
         "/otp": (context) => const OtpScreen(),
+        "/newpass": (context) => const NewPasswordScreen(),
+
         "/home": (context) =>
             const Scaffold(body: Center(child: Text("Home Screen"))),
       },
