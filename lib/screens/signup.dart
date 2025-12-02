@@ -77,7 +77,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 height: 48,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, "/otp"); // 🔥 HERE OTP OPENS
+                    Navigator.pushNamed(context, "/home"); //
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFFFFA000),

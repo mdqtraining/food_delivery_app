@@ -83,7 +83,9 @@ class _OtpScreenState extends State<OtpScreen> {
           const SizedBox(height: 30),
 
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, "/newpassword");
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFFFFA000),
               shape: RoundedRectangleBorder(

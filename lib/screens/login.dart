@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hunger_hub/screens/forgot_password.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -27,14 +26,12 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Title Sign In
               const Text(
                 "Sign In",
                 style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
@@ -42,12 +39,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 30),
 
-              // Email Input
               inputField("Email"),
-
               const SizedBox(height: 18),
 
-              // Password field
               inputField(
                 "Password",
                 obscure: hidePass,
@@ -61,11 +55,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 10),
 
-              // Forgot password
+              // Forgot Password
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/forgot");
+                  },
                   child: const Text(
                     "Forgot password?",
                     style: TextStyle(color: Colors.black54),
@@ -81,14 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 48,
                 child: ElevatedButton(
                   onPressed: () {
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          NewPasswordScreen() as Route<Object?>,
-                        );
-                      },
-                    );
+                    Navigator.pushReplacementNamed(context, "/home");
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFFA000),
@@ -102,7 +91,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
               const SizedBox(height: 20),
 
-              // OR Divider
               Row(
                 children: const [
                   Expanded(child: Divider(thickness: 1)),
@@ -114,7 +102,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
 
-              // Signup link
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

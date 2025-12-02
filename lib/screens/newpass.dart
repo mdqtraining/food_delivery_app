@@ -14,34 +14,41 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
   final passwordController = TextEditingController();
   final confirmController = TextEditingController();
 
-  void updatePassword() {
-    String pass = passwordController.text.trim();
-    String confirm = confirmController.text.trim();
-
-    if (pass.isEmpty || confirm.isEmpty) {
-      showError("Password fields cannot be empty");
-      return;
-    }
-    if (pass != confirm) {
-      showError("Passwords do not match");
-      return;
-    }
-    if (pass.length < 6) {
-      showError("Password must be at least 6 characters");
-      return;
-    }
-
-    // If everything is valid
-    Navigator.pushReplacementNamed(context, "/login");
-  }
-
   void showError(String msg) {
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(msg), backgroundColor: Colors.red));
   }
 
-  Widget inputBox(controller, String label, bool obscure, VoidCallback toggle) {
+  void updatePassword() {
+    String pass = passwordController.text.trim();
+    String confirm = confirmController.text.trim();
+
+    if (pass.isEmpty || confirm.isEmpty) {
+      showError("Password cannot be empty");
+      return;
+    }
+
+    if (pass != confirm) {
+      showError("Passwords do not match");
+      return;
+    }
+
+    if (pass.length < 6) {
+      showError("Password must be at least 6 characters");
+      return;
+    }
+
+    // SUCCESS → Go back to login
+    Navigator.pushReplacementNamed(context, "/login");
+  }
+
+  Widget passwordField(
+    TextEditingController controller,
+    String label,
+    bool obscure,
+    VoidCallback toggle,
+  ) {
     return TextField(
       controller: controller,
       obscureText: obscure,
@@ -72,20 +79,22 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
 
             const SizedBox(height: 30),
 
-            inputBox(
+            passwordField(
               passwordController,
               "New Password",
               hidePass,
               () => setState(() => hidePass = !hidePass),
             ),
+
             const SizedBox(height: 18),
 
-            inputBox(
+            passwordField(
               confirmController,
               "Confirm Password",
               hideConfirmPass,
               () => setState(() => hideConfirmPass = !hideConfirmPass),
             ),
+
             const SizedBox(height: 25),
 
             SizedBox(
