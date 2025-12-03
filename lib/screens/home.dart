@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // TOP BAR → Profile + Location
-              _topBar(),
+              _topBar(context),
 
               const SizedBox(height: 20),
 
@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
 
   // ------------------ COMPONENTS BELOW ------------------
 
-  Widget _topBar() {
+  Widget _topBar(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -73,11 +73,14 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
 
-        // Right: profile icon
-        const CircleAvatar(
-          radius: 22,
-          backgroundColor: Colors.orange,
-          child: Icon(Icons.person, color: Colors.white, size: 26),
+        // PROFILE ICON WITH NAVIGATION
+        GestureDetector(
+          onTap: () => Navigator.pushNamed(context, "/profile"),
+          child: const CircleAvatar(
+            radius: 22,
+            backgroundColor: Colors.orange,
+            child: Icon(Icons.person, color: Colors.white, size: 26),
+          ),
         ),
       ],
     );

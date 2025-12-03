@@ -5,6 +5,7 @@ import 'package:hunger_hub/screens/signup.dart';
 import 'package:hunger_hub/screens/forgot.dart';
 import 'package:hunger_hub/screens/newpass.dart';
 import 'package:hunger_hub/screens/home.dart';
+import 'package:hunger_hub/screens/profile.dart';
 
 import 'package:hunger_hub/splash.dart';
 import 'screens/onboarding.dart';
@@ -22,11 +23,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Hunger Hub',
       theme: ThemeData(
-        primaryColor: Color(0xFFFFA000),
+        primaryColor: const Color(0xFFFFA000),
         scaffoldBackgroundColor: Colors.white,
         fontFamily: 'Poppins',
       ),
-      home: const SplashScreen(), // App starts here
+      home: const SplashScreen(),
 
       routes: {
         "/onboarding": (context) => const OnboardingScreen(),
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         "/otp": (context) => const OtpScreen(),
         "/newpassword": (context) => const NewPasswordScreen(),
         "/home": (context) => const HomeScreen(),
+        "/profile": (context) => const ProfileScreen(),
       },
     );
   }
