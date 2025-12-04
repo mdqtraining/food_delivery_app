@@ -6,6 +6,7 @@ import 'package:hunger_hub/screens/forgot.dart';
 import 'package:hunger_hub/screens/newpass.dart';
 import 'package:hunger_hub/screens/home.dart';
 import 'package:hunger_hub/screens/profile.dart';
+import 'package:hunger_hub/screens/search.dart';
 
 import 'package:hunger_hub/splash.dart';
 import 'screens/onboarding.dart';
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         "/newpassword": (context) => const NewPasswordScreen(),
         "/home": (context) => const HomeScreen(),
         "/profile": (context) => const ProfileScreen(),
+        "/search": (context) => const SearchScreen(),
       },
     );
   }

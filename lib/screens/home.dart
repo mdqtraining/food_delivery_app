@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  // List screens = [ProfileScreen(),SearchScreen(),]
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: _bottomNavBar(),
 
+      bottomNavigationBar: _bottomNavBar(context),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
@@ -221,10 +222,26 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _bottomNavBar() {
+  Widget _bottomNavBar(BuildContext context) {
     return BottomNavigationBar(
       selectedItemColor: Colors.orange,
       unselectedItemColor: Colors.grey,
+      onTap: (index) {
+        switch (index) {
+          case 0:
+            Navigator.pushNamed(context, "/home");
+            break;
+          case 1:
+            Navigator.pushNamed(context, "/search");
+            break;
+          case 2:
+            Navigator.pushNamed(context, "/cart");
+            break;
+          case 3:
+            Navigator.pushNamed(context, "/profile");
+            break;
+        }
+      },
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
         BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
