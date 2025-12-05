@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
 
-      bottomNavigationBar: _bottomNavBar(context),
+      // bottomNavigationBar: _bottomNavBar(context),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
@@ -222,23 +222,22 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _bottomNavBar(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: 0,
-      selectedItemColor: Colors.orange,
-      unselectedItemColor: Colors.grey,
-      onTap: (index) {
-        if (index == 0) Navigator.pushReplacementNamed(context, "/home");
-        if (index == 1) Navigator.pushReplacementNamed(context, "/search");
-        if (index == 2) Navigator.pushReplacementNamed(context, "/cart");
-        if (index == 3) Navigator.pushReplacementNamed(context, "/profile");
-      },
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-        BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: "Cart"),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-      ],
-    );
-  }
+  // Widget _bottomNavBar(BuildContext context) {
+  //   return BottomNavigationBar(
+  //     currentIndex: 0,
+  //     selectedItemColor: Colors.orange,
+  //     unselectedItemColor: Colors.grey,
+  //     onTap: (index) {
+  //       if (index == 0) Navigator.pushReplacementNamed(context, "/home");
+  //       if (index == 1) Navigator.pushReplacementNamed(context, "/search");
+  //       if (index == 2) Navigator.pushReplacementNamed(context, "/cart");
+  //       if (index == 3) Navigator.pushReplacementNamed(context, "/profile");
+  //     },
+  //     items: const [
+  //       BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+  //       BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+  //       BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: "Cart"),
+  //       BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+  //     ],
+  //   );
 }

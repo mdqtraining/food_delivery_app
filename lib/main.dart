@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hunger_hub/screens/login.dart';
+import 'package:hunger_hub/screens/main_screen.dart';
 import 'package:hunger_hub/screens/otp.dart';
 import 'package:hunger_hub/screens/signup.dart';
 import 'package:hunger_hub/screens/forgot.dart';
 import 'package:hunger_hub/screens/newpass.dart';
-import 'package:hunger_hub/screens/home.dart';
+// import 'package:hunger_hub/screens/home.dart';
 import 'package:hunger_hub/screens/profile.dart';
 import 'package:hunger_hub/screens/search.dart';
 
@@ -37,7 +38,8 @@ class MyApp extends StatelessWidget {
         "/forgot": (context) => const ForgotPasswordScreen(),
         "/otp": (context) => const OtpScreen(),
         "/newpassword": (context) => const NewPasswordScreen(),
-        "/home": (context) => const HomeScreen(),
+        "/home": (context) => const MainScreen(),
+        "/main_screen": (context) => const MainScreen(),
         "/profile": (context) => const ProfileScreen(),
         "/search": (context) => const SearchScreen(),
       },

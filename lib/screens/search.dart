@@ -6,7 +6,7 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: _bottomNavBar(context),
+      // bottomNavigationBar: _bottomNavBar(context),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
@@ -39,23 +39,23 @@ class SearchScreen extends StatelessWidget {
     );
   }
 
-  Widget _bottomNavBar(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: 1,
-      selectedItemColor: Colors.orange,
-      unselectedItemColor: Colors.grey,
-      onTap: (index) {
-        if (index == 0) Navigator.pushReplacementNamed(context, "/home");
-        if (index == 1) Navigator.pushReplacementNamed(context, "/search");
-        if (index == 2) Navigator.pushReplacementNamed(context, "/cart");
-        if (index == 3) Navigator.pushReplacementNamed(context, "/profile");
-      },
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-        BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: "Cart"),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-      ],
-    );
-  }
+  // Widget _bottomNavBar(BuildContext context) {
+  //   return BottomNavigationBar(
+  //     currentIndex: 1,
+  //     selectedItemColor: Colors.orange,
+  //     unselectedItemColor: Colors.grey,
+  //     onTap: (index) {
+  //       if (index == 0) Navigator.pushReplacementNamed(context, "/home");
+  //       if (index == 1) Navigator.pushReplacementNamed(context, "/search");
+  //       if (index == 2) Navigator.pushReplacementNamed(context, "/cart");
+  //       if (index == 3) Navigator.pushReplacementNamed(context, "/profile");
+  //     },
+  //     items: const [
+  //       BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+  //       BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
+  //       BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: "Cart"),
+  //       BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+  //     ],
+  //   );
+  // }
 }
