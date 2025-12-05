@@ -113,6 +113,7 @@ class ProfileScreen extends StatelessWidget {
 
   Widget _bottomNavBar(BuildContext context) {
     return BottomNavigationBar(
+      currentIndex: 3,
       selectedItemColor: Colors.orange,
       unselectedItemColor: Colors.grey,
       onTap: (index) {

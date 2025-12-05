@@ -224,23 +224,14 @@ class HomeScreen extends StatelessWidget {
 
   Widget _bottomNavBar(BuildContext context) {
     return BottomNavigationBar(
+      currentIndex: 0,
       selectedItemColor: Colors.orange,
       unselectedItemColor: Colors.grey,
       onTap: (index) {
-        switch (index) {
-          case 0:
-            Navigator.pushNamed(context, "/home");
-            break;
-          case 1:
-            Navigator.pushNamed(context, "/search");
-            break;
-          case 2:
-            Navigator.pushNamed(context, "/cart");
-            break;
-          case 3:
-            Navigator.pushNamed(context, "/profile");
-            break;
-        }
+        if (index == 0) Navigator.pushReplacementNamed(context, "/home");
+        if (index == 1) Navigator.pushReplacementNamed(context, "/search");
+        if (index == 2) Navigator.pushReplacementNamed(context, "/cart");
+        if (index == 3) Navigator.pushReplacementNamed(context, "/profile");
       },
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
