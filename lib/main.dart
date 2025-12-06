@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hunger_hub/screens/cart.dart';
+import 'package:hunger_hub/screens/edit_pofile.dart';
 import 'package:hunger_hub/screens/login.dart';
 import 'package:hunger_hub/screens/main_screen.dart';
 import 'package:hunger_hub/screens/otp.dart';
@@ -41,7 +43,9 @@ class MyApp extends StatelessWidget {
         "/home": (context) => const MainScreen(),
         "/main_screen": (context) => const MainScreen(),
         "/profile": (context) => const ProfileScreen(),
+        "/editProfile": (context) => EditProfileScreen(),
         "/search": (context) => const SearchScreen(),
+        "/cart": (context) => const CartScreen(),
       },
     );
   }

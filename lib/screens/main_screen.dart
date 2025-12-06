@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'search.dart';
-// import 'cart.dart';
+import 'cart.dart';
 import 'profile.dart';
 
 class MainScreen extends StatefulWidget {
@@ -14,12 +14,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
 
-  final screens = [
-    HomeScreen(),
-    SearchScreen(),
-    ProfileScreen(),
-    ProfileScreen(),
-  ];
+  final screens = [HomeScreen(), SearchScreen(), CartScreen(), ProfileScreen()];
 
   @override
   Widget build(BuildContext context) {
