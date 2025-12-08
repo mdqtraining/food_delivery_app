@@ -106,15 +106,14 @@ class HomeScreen extends StatelessWidget {
       height: 160,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.orange.shade300,
+        color: const Color(0xFFFFB74D),
         borderRadius: BorderRadius.circular(20),
-        image: const DecorationImage(
-          image: NetworkImage(
-            "https://img.freepik.com/free-vector/food-delivery-banner-template_23-2148564700.jpg",
-          ),
-          fit: BoxFit.cover,
-        ),
+        // image: const DecorationImage(
+        //   image: Image.ass("assets/images/promo.png"),
+        //   fit: BoxFit.cover,
+        // ),
       ),
+      child: Image.asset("assets/images/promo.png", fit: BoxFit.cover),
     );
   }
 
