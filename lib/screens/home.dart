@@ -102,18 +102,15 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _promoBanner() {
-    return Container(
-      height: 160,
-      width: double.infinity,
-      decoration: BoxDecoration(
+    return ClipRRect(
+      //widget used to round the corners of any widget
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        height: 160,
+        width: double.infinity,
         color: const Color(0xFFFFB74D),
-        borderRadius: BorderRadius.circular(20),
-        // image: const DecorationImage(
-        //   image: Image.ass("assets/images/promo.png"),
-        //   fit: BoxFit.cover,
-        // ),
+        child: Image.asset("assets/images/promo.png", fit: BoxFit.cover),
       ),
-      child: Image.asset("assets/images/promo.png", fit: BoxFit.cover),
     );
   }
 
@@ -136,7 +133,7 @@ class HomeScreen extends StatelessWidget {
             margin: const EdgeInsets.only(right: 12),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             decoration: BoxDecoration(
-              color: Colors.grey.shade200,
+              color: const Color(0xFFFFB74D),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Center(

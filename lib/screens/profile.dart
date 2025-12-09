@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+// class ProfileScreen extends StatelessWidget {
+// const ProfileScreen({super.key});
 
-  Widget menuItem(IconData icon, String title) {
-    return Container(
+Widget menuItem(IconData icon, String title, {VoidCallback? onTap}) {
+  return InkWell(
+    onTap: onTap,
+    borderRadius: BorderRadius.circular(12),
+    child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 3)),
         ],
       ),
@@ -26,97 +29,104 @@ class ProfileScreen extends StatelessWidget {
           const Icon(Icons.arrow_forward_ios, size: 18, color: Colors.grey),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      // bottomNavigationBar: _bottomNavBar(context),
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            // SCROLLABLE CONTENT
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  children: [
-                    // PROFILE CARD
-                    Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 6,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          const CircleAvatar(
-                            radius: 40,
-                            backgroundColor: Colors.orange,
-                            child: Icon(
-                              Icons.person,
-                              color: Colors.white,
-                              size: 40,
-                            ),
-                          ),
-                          const SizedBox(width: 15),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                "Vicky",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                "vicky@gmail.com",
-                                style: TextStyle(color: Colors.black54),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, "/editProfile");
-                            },
-                            child: const Icon(
-                              Icons.edit,
-                              color: Colors.grey,
-                              size: 22,
-                            ),
-                          ),
-                        ],
-                      ),
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    // bottomNavigationBar: _bottomNavBar(context),
+    backgroundColor: Colors.white,
+    body: SafeArea(
+      child: Column(
+        children: [
+          // SCROLLABLE CONTENT
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  // PROFILE CARD
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 6,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
                     ),
+                    child: Row(
+                      children: [
+                        const CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Colors.orange,
+                          child: Icon(
+                            Icons.person,
+                            color: Colors.white,
+                            size: 40,
+                          ),
+                        ),
+                        const SizedBox(width: 15),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              "Vicky",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              "vicky@gmail.com",
+                              style: TextStyle(color: Colors.black54),
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, "/editProfile");
+                          },
+                          child: const Icon(
+                            Icons.edit,
+                            color: Colors.grey,
+                            size: 22,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
 
-                    const SizedBox(height: 25),
+                  const SizedBox(height: 25),
 
-                    // MENU ITEMS
-                    menuItem(Icons.history, "My Orders"),
-                    menuItem(Icons.payment, "Payment Method"),
-                    menuItem(Icons.location_on, "My Address"),
-                    menuItem(Icons.card_giftcard, "My Promocodes"),
-                    menuItem(Icons.favorite, "My Favorite"),
-                    menuItem(Icons.logout, "Sign out"),
-                  ],
-                ),
+                  // MENU ITEMS
+                  menuItem(
+                    Icons.history,
+                    "My Orders",
+                    onTap: () {
+                      Navigator.pushNamed(context, "/MyOrders");
+                    },
+                  ),
+
+                  // menuItem(Icons.payment, "Payment Method"),
+                  // menuItem(Icons.location_on, "My Address"),
+                  // menuItem(Icons.card_giftcard, "My Promocodes"),
+                  // menuItem(Icons.favorite, "My Favorite"),
+                  // menuItem(Icons.logout, "Sign out"),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
 }
