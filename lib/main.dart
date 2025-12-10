@@ -47,7 +47,8 @@ class MyApp extends StatelessWidget {
         "/editProfile": (context) => EditProfileScreen(),
         "/search": (context) => const SearchScreen(),
         "/cart": (context) => const CartScreen(),
-        "/MyOrders": (context) => const MyOrdersScreen(),
+        "/MyOrdersScreen": (context) => const MyOrdersScreen(),
+        "/SplashScreen": (context) => const SplashScreen(),
       },
     );
   }

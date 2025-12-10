@@ -20,7 +20,7 @@ class MyOrdersScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // step 2 will go here
+            // 2
           ],
         ),
       ),
