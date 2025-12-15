@@ -5,6 +5,7 @@ import 'package:hunger_hub/screens/login.dart';
 import 'package:hunger_hub/screens/main_screen.dart';
 import 'package:hunger_hub/screens/my_orders.dart';
 import 'package:hunger_hub/screens/otp.dart';
+import 'package:hunger_hub/screens/payment_methods.dart';
 import 'package:hunger_hub/screens/signup.dart';
 import 'package:hunger_hub/screens/forgot.dart';
 import 'package:hunger_hub/screens/newpass.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
         "/cart": (context) => const CartScreen(),
         "/MyOrdersScreen": (context) => const MyOrdersScreen(),
         "/SplashScreen": (context) => const SplashScreen(),
+        "/PaymentMethodsScreen": (context) => const PaymentMethodsScreen(),
       },
     );
   }

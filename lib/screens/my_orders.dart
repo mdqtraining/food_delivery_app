@@ -60,8 +60,8 @@ class MyOrdersScreen extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   status,
-                  style: const TextStyle(
-                    color: Colors.green,
+                  style: TextStyle(
+                    color: getStatusColor(status),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -119,5 +119,18 @@ class MyOrdersScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Color? getStatusColor(String status) {
+    switch (status) {
+      case "Delivered":
+        return Colors.green;
+      case "Cancelled":
+        return Colors.red;
+      case "Ongoing":
+        return Colors.orange;
+      default:
+        return Colors.grey;
+    }
   }
 }

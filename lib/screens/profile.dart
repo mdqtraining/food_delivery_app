@@ -121,7 +121,8 @@ class ProfileScreen extends StatelessWidget {
                     menuItem(
                       Icons.payment,
                       "Payment Method",
-                      onTap: () => Navigator.pushNamed(context, "/payment"),
+                      onTap: () =>
+                          Navigator.pushNamed(context, "/PaymentMethodsScreen"),
                     ),
 
                     menuItem(
