@@ -3,6 +3,8 @@ import 'package:hunger_hub/screens/cart.dart';
 import 'package:hunger_hub/screens/edit_pofile.dart';
 import 'package:hunger_hub/screens/login.dart';
 import 'package:hunger_hub/screens/main_screen.dart';
+import 'package:hunger_hub/screens/my_address.dart';
+import 'package:hunger_hub/screens/my_favorite.dart';
 import 'package:hunger_hub/screens/my_orders.dart';
 import 'package:hunger_hub/screens/otp.dart';
 import 'package:hunger_hub/screens/payment_methods.dart';
@@ -51,6 +53,8 @@ class MyApp extends StatelessWidget {
         "/MyOrdersScreen": (context) => const MyOrdersScreen(),
         "/SplashScreen": (context) => const SplashScreen(),
         "/PaymentMethodsScreen": (context) => const PaymentMethodsScreen(),
+        "/Address": (context) => const MyAddressScreen(),
+        "/Favorites": (context) => const MyFavoritesScreen(),
       },
     );
   }

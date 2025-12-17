@@ -128,20 +128,19 @@ class ProfileScreen extends StatelessWidget {
                     menuItem(
                       Icons.location_on,
                       "My Address",
-                      onTap: () => Navigator.pushNamed(context, "/address"),
+                      onTap: () => Navigator.pushNamed(context, "/Address"),
                     ),
 
                     menuItem(
                       Icons.favorite,
                       "My Favorite",
-                      onTap: () => Navigator.pushNamed(context, "/favorites"),
+                      onTap: () => Navigator.pushNamed(context, "/Favorites"),
                     ),
 
                     menuItem(
                       Icons.logout,
                       "Sign out",
-                      onTap: () =>
-                          Navigator.pushNamed(context, "/SplashScreen"),
+                      onTap: () => Navigator.pushNamed(context, "/login"),
                     ),
                   ],
                 ),
