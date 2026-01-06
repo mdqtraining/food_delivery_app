@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hunger_hub/Auth/auth_gate.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -11,7 +13,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _controller = PageController();
   int currentIndex = 0;
 
-  final List<Map<String, dynamic>> pages = [
+  final List<Map<String, String>> pages = [
     {
       "img": "assets/images/search_restaurants.png",
       "title": "Search Restaurants",
@@ -29,6 +31,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     },
   ];
 
+  /// MARK ONBOARDING AS DONE + GO TO AUTH GATE
+  Future<void> completeOnboarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('seenOnboarding', true);
+
+    if (!mounted) return;
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const AuthGate()),
+    );
+  }
+
   void nextPage() {
     if (currentIndex < pages.length - 1) {
       _controller.nextPage(
@@ -36,7 +51,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      Navigator.pushReplacementNamed(context, '/login');
+      completeOnboarding();
     }
   }
 
@@ -47,40 +62,44 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Skip button
+            // SKIP BUTTON
             Align(
               alignment: Alignment.topRight,
               child: TextButton(
-                onPressed: () =>
-                    Navigator.pushReplacementNamed(context, "/login"),
-                child: const Text("Skip"),
+                onPressed: completeOnboarding,
+                child: const Text(
+                  "Skip",
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ),
 
+            // PAGE VIEW
             Expanded(
               child: PageView.builder(
                 controller: _controller,
                 itemCount: pages.length,
-                onPageChanged: (value) => setState(() => currentIndex = value),
+                onPageChanged: (index) {
+                  setState(() => currentIndex = index);
+                },
                 itemBuilder: (_, i) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(pages[i]["img"], height: 240),
+                      Image.asset(pages[i]["img"]!, height: 240),
                       const SizedBox(height: 25),
                       Text(
-                        pages[i]["title"],
+                        pages[i]["title"]!,
                         style: const TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
                         ),
                       ),
                       const SizedBox(height: 12),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 35),
                         child: Text(
-                          pages[i]["subtitle"],
+                          pages[i]["subtitle"]!,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 15,
@@ -94,7 +113,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
 
-            // Indicator dots
+            // INDICATORS
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
@@ -105,7 +124,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   height: 8,
                   width: currentIndex == i ? 22 : 8,
                   decoration: BoxDecoration(
-                    color: currentIndex == i ? Color(0xFFFFA000) : Colors.grey,
+                    color: currentIndex == i
+                        ? const Color(0xFFFFA000)
+                        : Colors.grey,
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
@@ -114,7 +135,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
             const SizedBox(height: 25),
 
-            // Next / Get Started button
+            // NEXT / GET STARTED BUTTON
             ElevatedButton(
               onPressed: nextPage,
               style: ElevatedButton.styleFrom(

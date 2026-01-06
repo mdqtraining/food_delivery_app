@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -8,11 +9,62 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+
   bool hidePass = true;
   bool hideConfirmPass = true;
+  bool isLoading = false;
 
-  Widget inputField(String hint, {bool obscure = false, Widget? suffix}) {
+  // SIGNUP LOGIC
+  Future<void> signUp() async {
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+    final confirmPassword = confirmPasswordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+      showError("All fields are required");
+      return;
+    }
+
+    if (password != confirmPassword) {
+      showError("Passwords do not match");
+      return;
+    }
+
+    try {
+      setState(() => isLoading = true);
+
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      showError(e.message ?? "Signup failed");
+    } finally {
+      setState(() => isLoading = false);
+    }
+  }
+
+  //  ERROR SNACKBAR
+  void showError(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message), backgroundColor: Colors.red),
+    );
+  }
+
+  //  INPUT FIELD
+  Widget inputField(
+    String hint, {
+    required TextEditingController controller,
+    bool obscure = false,
+    Widget? suffix,
+  }) {
     return TextField(
+      controller: controller,
       obscureText: obscure,
       decoration: InputDecoration(
         hintText: hint,
@@ -23,6 +75,7 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
+  //  UI
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,14 +93,15 @@ class _SignupScreenState extends State<SignupScreen> {
 
               const SizedBox(height: 30),
 
-              inputField("Name"),
+              inputField("Name", controller: nameController),
               const SizedBox(height: 18),
 
-              inputField("Email"),
+              inputField("Email", controller: emailController),
               const SizedBox(height: 18),
 
               inputField(
                 "Password",
+                controller: passwordController,
                 obscure: hidePass,
                 suffix: IconButton(
                   icon: Icon(
@@ -60,6 +114,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
               inputField(
                 "Confirm Password",
+                controller: confirmPasswordController,
                 obscure: hideConfirmPass,
                 suffix: IconButton(
                   icon: Icon(
@@ -70,22 +125,22 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
               ),
 
-              const SizedBox(height: 18),
+              const SizedBox(height: 25),
 
               SizedBox(
                 width: double.infinity,
                 height: 48,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, "/home"); //
-                  },
+                  onPressed: isLoading ? null : signUp,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFFA000),
+                    backgroundColor: const Color(0xFFFFA000),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  child: const Text("SIGN UP", style: TextStyle(fontSize: 16)),
+                  child: isLoading
+                      ? const CircularProgressIndicator(color: Colors.white)
+                      : const Text("SIGN UP", style: TextStyle(fontSize: 16)),
                 ),
               ),
 

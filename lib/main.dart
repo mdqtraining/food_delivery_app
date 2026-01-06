@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hunger_hub/Auth/auth_gate.dart';
 import 'package:hunger_hub/screens/cart.dart';
 import 'package:hunger_hub/screens/edit_pofile.dart';
 import 'package:hunger_hub/screens/login.dart';
@@ -14,11 +16,13 @@ import 'package:hunger_hub/screens/newpass.dart';
 // import 'package:hunger_hub/screens/home.dart';
 import 'package:hunger_hub/screens/profile.dart';
 import 'package:hunger_hub/screens/search.dart';
-
 import 'package:hunger_hub/splash.dart';
 import 'screens/onboarding.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -35,6 +39,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         fontFamily: 'Poppins',
       ),
+
       home: const SplashScreen(),
 
       routes: {
@@ -45,13 +50,11 @@ class MyApp extends StatelessWidget {
         "/otp": (context) => const OtpScreen(),
         "/newpassword": (context) => const NewPasswordScreen(),
         "/home": (context) => const MainScreen(),
-        "/main_screen": (context) => const MainScreen(),
         "/profile": (context) => const ProfileScreen(),
-        "/editProfile": (context) => EditProfileScreen(),
+        "/editProfile": (context) => const EditProfileScreen(),
         "/search": (context) => const SearchScreen(),
         "/cart": (context) => const CartScreen(),
         "/MyOrdersScreen": (context) => const MyOrdersScreen(),
-        "/SplashScreen": (context) => const SplashScreen(),
         "/PaymentMethodsScreen": (context) => const PaymentMethodsScreen(),
         "/Address": (context) => const MyAddressScreen(),
         "/Favorites": (context) => const MyFavoritesScreen(),
