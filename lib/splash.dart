@@ -13,10 +13,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    checkNextScreen();
+    _navigateNext();
   }
 
-  Future<void> checkNextScreen() async {
+  Future<void> _navigateNext() async {
     await Future.delayed(const Duration(seconds: 2));
 
     final prefs = await SharedPreferences.getInstance();
@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
         MaterialPageRoute(builder: (_) => const AuthGate()),
       );
     } else {
-      Navigator.pushReplacementNamed(context, '/onboarding');
+      Navigator.pushReplacementNamed(context, "/onboarding");
     }
   }
 

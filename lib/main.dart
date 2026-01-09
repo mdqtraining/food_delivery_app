@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hunger_hub/Auth/auth_gate.dart';
+import 'Auth/auth_gate.dart';
 import 'package:hunger_hub/screens/cart.dart';
 import 'package:hunger_hub/screens/edit_pofile.dart';
 import 'package:hunger_hub/screens/login.dart';
