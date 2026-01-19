@@ -63,7 +63,7 @@ class MyFavoritesScreen extends StatelessWidget {
           // REMOVE ICON
           InkWell(
             onTap: onRemove,
-            child: const Icon(Icons.favorite, color: Colors.red),
+            child: const Icon(Icons.favorite, color: Color(0xFFFFA000)),
           ),
         ],
       ),
