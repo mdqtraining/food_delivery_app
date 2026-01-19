@@ -19,14 +19,29 @@ class _SignupScreenState extends State<SignupScreen> {
   bool hideConfirmPass = true;
   bool isLoading = false;
 
-  // SIGNUP LOGIC
+  // ================= SIGN UP LOGIC =================
   Future<void> signUp() async {
+    final name = nameController.text.trim();
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
     final confirmPassword = confirmPasswordController.text.trim();
 
-    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+    // VALIDATION
+    if (name.isEmpty ||
+        email.isEmpty ||
+        password.isEmpty ||
+        confirmPassword.isEmpty) {
       showError("All fields are required");
+      return;
+    }
+
+    if (!email.contains("@")) {
+      showError("Enter a valid email");
+      return;
+    }
+
+    if (password.length < 6) {
+      showError("Password must be at least 6 characters");
       return;
     }
 
@@ -42,21 +57,31 @@ class _SignupScreenState extends State<SignupScreen> {
         email: email,
         password: password,
       );
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Signup successful")));
+
+      Navigator.pushReplacementNamed(context, "/login");
     } on FirebaseAuthException catch (e) {
       showError(e.message ?? "Signup failed");
+    } catch (e) {
+      showError("Something went wrong");
     } finally {
-      setState(() => isLoading = false);
+      if (mounted) setState(() => isLoading = false);
     }
   }
 
-  //  ERROR SNACKBAR
+  // ================= ERROR =================
   void showError(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(message), backgroundColor: Colors.red),
     );
   }
 
-  //  INPUT FIELD
+  // ================= INPUT FIELD =================
   Widget inputField(
     String hint, {
     required TextEditingController controller,
@@ -68,14 +93,14 @@ class _SignupScreenState extends State<SignupScreen> {
       obscureText: obscure,
       decoration: InputDecoration(
         hintText: hint,
-        suffixIcon: suffix,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        suffixIcon: suffix,
         contentPadding: const EdgeInsets.all(15),
       ),
     );
   }
 
-  //  UI
+  // ================= UI =================
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,10 +174,7 @@ class _SignupScreenState extends State<SignupScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    "Already have an account? ",
-                    style: TextStyle(fontSize: 14),
-                  ),
+                  const Text("Already have an account? "),
                   GestureDetector(
                     onTap: () =>
                         Navigator.pushReplacementNamed(context, "/login"),

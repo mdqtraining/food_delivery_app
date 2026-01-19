@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'Auth/auth_gate.dart';
+import 'package:hunger_hub/Auth/auth_gate.dart';
 import 'package:hunger_hub/screens/cart.dart';
 import 'package:hunger_hub/screens/edit_pofile.dart';
 import 'package:hunger_hub/screens/login.dart';
@@ -10,7 +10,7 @@ import 'package:hunger_hub/screens/my_favorite.dart';
 import 'package:hunger_hub/screens/my_orders.dart';
 import 'package:hunger_hub/screens/otp.dart';
 import 'package:hunger_hub/screens/payment_methods.dart';
-import 'package:hunger_hub/screens/signup.dart';
+import 'package:hunger_hub/screens/signup.dart' hide LoginScreen;
 import 'package:hunger_hub/screens/forgot.dart';
 import 'package:hunger_hub/screens/newpass.dart';
 // import 'package:hunger_hub/screens/home.dart';
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Poppins',
       ),
 
-      home: const SplashScreen(),
+      home: const AuthGate(),
 
       routes: {
         "/onboarding": (context) => const OnboardingScreen(),
