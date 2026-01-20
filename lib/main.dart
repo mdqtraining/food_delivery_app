@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hunger_hub/Auth/auth_gate.dart';
-import 'package:hunger_hub/screens/cart.dart';
+import 'package:hunger_hub/MainScreen/cart.dart';
+import 'package:hunger_hub/screens/category_results.dart';
 import 'package:hunger_hub/screens/edit_pofile.dart';
 import 'package:hunger_hub/screens/login.dart';
 import 'package:hunger_hub/screens/main_screen.dart';
@@ -9,14 +10,14 @@ import 'package:hunger_hub/screens/my_address.dart';
 import 'package:hunger_hub/screens/my_favorite.dart';
 import 'package:hunger_hub/screens/my_orders.dart';
 import 'package:hunger_hub/screens/otp.dart';
+import 'package:hunger_hub/screens/category_results.dart';
 import 'package:hunger_hub/screens/payment_methods.dart';
 import 'package:hunger_hub/screens/signup.dart' hide LoginScreen;
 import 'package:hunger_hub/screens/forgot.dart';
 import 'package:hunger_hub/screens/newpass.dart';
 // import 'package:hunger_hub/screens/home.dart';
-import 'package:hunger_hub/screens/profile.dart';
-import 'package:hunger_hub/screens/search.dart';
-import 'package:hunger_hub/splash.dart';
+import 'package:hunger_hub/MainScreen/profile.dart';
+import 'package:hunger_hub/MainScreen/search.dart';
 import 'screens/onboarding.dart';
 
 Future<void> main() async {
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
         "/forgot": (context) => const ForgotPasswordScreen(),
         "/otp": (context) => const OtpScreen(),
         "/newpassword": (context) => const NewPasswordScreen(),
-        "/home": (context) => const MainScreen(),
+        "/category": (context) => const CategoryResultScreen(categoryId: ''),
         "/profile": (context) => const ProfileScreen(),
         "/editProfile": (context) => const EditProfileScreen(),
         "/search": (context) => const SearchScreen(),

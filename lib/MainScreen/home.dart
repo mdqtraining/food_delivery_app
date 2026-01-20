@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../data/dummy_categories.dart';
+import '../widgets/category_item.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -29,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 12),
-              _categoryList(),
+              _categoryList(context),
 
               const SizedBox(height: 25),
 
@@ -52,39 +54,37 @@ class HomeScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        GestureDetector(
-          onTap: () {
-            // Later: open location picker
-          },
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Delivery to",
-                style: TextStyle(color: Colors.black54),
-              ),
-              const SizedBox(height: 5),
-              Row(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text("Delivery to", style: TextStyle(color: Colors.black54)),
+            const SizedBox(height: 5),
+
+            GestureDetector(
+              onTap: () {
+                // later: open address selection
+              },
+              child: Row(
                 children: const [
-                  Icon(Icons.location_on, size: 18, color: primaryOrange),
+                  Icon(Icons.location_on, color: Colors.orange, size: 20),
                   SizedBox(width: 4),
                   Text(
                     "Current Location",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
-                  SizedBox(width: 4),
+                  SizedBox(width: 2),
                   Icon(Icons.keyboard_arrow_down),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
 
         GestureDetector(
           onTap: () => Navigator.pushNamed(context, "/profile"),
           child: const CircleAvatar(
             radius: 22,
-            backgroundColor: Color(0xFFFFA000),
+            backgroundColor: Colors.orange,
             child: Icon(Icons.person, color: Colors.white, size: 26),
           ),
         ),
@@ -124,50 +124,30 @@ class HomeScreen extends StatelessWidget {
 
   // ---------------- CATEGORIES ----------------
 
-  Widget _categoryList() {
-    final List<Map<String, dynamic>> categories = [
-      {"title": "Burger", "icon": Icons.lunch_dining},
-      {"title": "Pizza", "icon": Icons.local_pizza},
-      {"title": "Drinks", "icon": Icons.local_drink},
-      {"title": "Snacks", "icon": Icons.fastfood},
-      {"title": "Dessert", "icon": Icons.icecream},
-    ];
+ Widget _categoryList(BuildContext context) {
+  return SizedBox(
+    height: 90,
+    child: ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: dummyCategories.length,
+      itemBuilder: (context, index) {
+        final category = dummyCategories[index];
 
-    return SizedBox(
-      height: 100,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
-        itemBuilder: (context, index) {
-          return Container(
-            width: 90,
-            margin: const EdgeInsets.only(right: 12),
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: primaryOrange,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(categories[index]["icon"], size: 30, color: Colors.white),
-                const SizedBox(height: 8),
-                Text(
-                  categories[index]["title"],
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
+        return CategoryItem(
+          category: category, // pass the model
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              '/category',
+              arguments: category,
+            );
+          },
+        );
+      },
+    ),
+  );
+}
+
 
   // ---------------- RESTAURANTS ----------------
 
