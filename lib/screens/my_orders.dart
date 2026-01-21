@@ -93,8 +93,7 @@ class MyOrdersScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             orderCard(
-              imageUrl:
-                  "https://img.freepik.com/free-photo/delicious-burger_1232-83.jpg",
+              imageUrl: "assets/images/Cheese_Burger.jpg",
               title: "Cheese Burger",
               price: "\$8.99",
               status: "Delivered",

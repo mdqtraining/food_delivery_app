@@ -1,6 +1,6 @@
 import '../models/category_model.dart';
 
-final dummyCategories = [
+final List<CategoryModel> dummyCategories = [
   CategoryModel(
     id: 'burger',
     title: 'Burger',

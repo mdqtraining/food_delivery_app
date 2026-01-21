@@ -1,28 +1,40 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hunger_hub/Auth/auth_gate.dart';
-import 'package:hunger_hub/MainScreen/cart.dart';
-import 'package:hunger_hub/screens/category_results.dart';
-import 'package:hunger_hub/screens/edit_pofile.dart';
-import 'package:hunger_hub/screens/login.dart';
-import 'package:hunger_hub/screens/main_screen.dart';
-import 'package:hunger_hub/screens/my_address.dart';
-import 'package:hunger_hub/screens/my_favorite.dart';
-import 'package:hunger_hub/screens/my_orders.dart';
-import 'package:hunger_hub/screens/otp.dart';
-import 'package:hunger_hub/screens/category_results.dart';
-import 'package:hunger_hub/screens/payment_methods.dart';
-import 'package:hunger_hub/screens/signup.dart' hide LoginScreen;
-import 'package:hunger_hub/screens/forgot.dart';
-import 'package:hunger_hub/screens/newpass.dart';
-// import 'package:hunger_hub/screens/home.dart';
-import 'package:hunger_hub/MainScreen/profile.dart';
-import 'package:hunger_hub/MainScreen/search.dart';
+import 'package:flutter/services.dart';
+
+import 'Auth/auth_gate.dart';
+
+import 'screens/main_screen.dart';
 import 'screens/onboarding.dart';
+import 'screens/login.dart';
+import 'screens/signup.dart';
+import 'screens/forgot.dart';
+import 'screens/otp.dart';
+import 'screens/newpass.dart';
+import 'screens/edit_pofile.dart';
+import 'screens/category_results.dart';
+
+// import 'MainScreen/main_screen.dart';
+import 'MainScreen/profile.dart';
+import 'MainScreen/search.dart';
+import 'MainScreen/cart.dart';
+
+import 'screens/my_address.dart';
+import 'screens/my_favorite.dart';
+import 'screens/my_orders.dart';
+import 'screens/payment_methods.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // THIS removes the black bar
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+    ),
+  );
 
   runApp(const MyApp());
 }
@@ -41,6 +53,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Poppins',
       ),
 
+      // AUTH FLOW ENTRY POINT
       home: const AuthGate(),
 
       routes: {
@@ -50,11 +63,15 @@ class MyApp extends StatelessWidget {
         "/forgot": (context) => const ForgotPasswordScreen(),
         "/otp": (context) => const OtpScreen(),
         "/newpassword": (context) => const NewPasswordScreen(),
-        "/category": (context) => const CategoryResultScreen(categoryId: ''),
+
+        "/home": (context) => const MainScreen(),
         "/profile": (context) => const ProfileScreen(),
         "/editProfile": (context) => const EditProfileScreen(),
         "/search": (context) => const SearchScreen(),
         "/cart": (context) => const CartScreen(),
+
+        "/category": (context) => const CategoryResultScreen(categoryId: ''),
+
         "/MyOrdersScreen": (context) => const MyOrdersScreen(),
         "/PaymentMethodsScreen": (context) => const PaymentMethodsScreen(),
         "/Address": (context) => const MyAddressScreen(),

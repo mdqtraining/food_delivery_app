@@ -28,7 +28,7 @@ class _CartScreenState extends State<CartScreen> {
               const SizedBox(height: 10),
 
               const Text(
-                "3 items", // later this will update based on cart length
+                "1 items", // later this will update based on cart length
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
 
@@ -58,9 +58,7 @@ class _CartScreenState extends State<CartScreen> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         image: const DecorationImage(
-                          image: NetworkImage(
-                            "https://img.freepik.com/free-photo/delicious-burger_1232-83.jpg",
-                          ),
+                          image: AssetImage("assets/images/Cheese_Burger.jpg"),
                           fit: BoxFit.cover,
                         ),
                       ),
