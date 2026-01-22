@@ -10,108 +10,120 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _topBar(context),
-              const SizedBox(height: 20),
+      body: CustomScrollView(
+        slivers: [
+          // ---------- COLLAPSING LOCATION + PROFILE ----------
+          SliverAppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            pinned: false,
+            expandedHeight: 0,
+            automaticallyImplyLeading: false,
 
-              _searchBar(),
-              const SizedBox(height: 20),
+            flexibleSpace: SafeArea(
+              bottom: false,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 5,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {},
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.location_on,
+                            color: Theme.of(context).primaryColor,
+                            size: 28,
+                          ),
+                          const SizedBox(width: 6),
 
-              _promoBanner(),
-              const SizedBox(height: 25),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Row(
+                                children: [
+                                  Text(
+                                    "Current Location",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Icon(Icons.keyboard_arrow_down),
+                                ],
+                              ),
+                              SizedBox(height: 2),
+                              Text(
+                                "Tambaram, Chennai",
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
 
-              const Text(
-                "Categories",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                    CircleAvatar(
+                      radius: 22,
+                      backgroundColor: primaryOrange,
+                      child: Icon(Icons.person, color: Colors.white),
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 12),
-
-              _categoryList(context),
-
-              const SizedBox(height: 25),
-
-              const Text(
-                "Popular Restaurants",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-              ),
-              const SizedBox(height: 12),
-
-              _popularRestaurants(),
-            ],
+            ),
           ),
-        ),
+
+          // ---------- PINNED SEARCH BAR ----------
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: SearchBarSliverDelegate(height: 80, child: _searchBar()),
+          ),
+
+          // ---------- CONTENT ----------
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _promoBanner(),
+                  const SizedBox(height: 25),
+
+                  const Text(
+                    "Categories",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(height: 12),
+                  _categoryList(context),
+
+                  const SizedBox(height: 25),
+
+                  const Text(
+                    "Popular Restaurants",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(height: 12),
+                  _popularRestaurants(),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  // ---------------- TOP BAR ----------------
-
-  Widget _topBar(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // LOCATION BLOCK
-        GestureDetector(
-          onTap: () {
-            // later: open location selector
-          },
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 6),
-                child: Icon(Icons.location_on, color: Colors.orange, size: 30),
-              ),
-              const SizedBox(width: 6),
-
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: const [
-                      Text(
-                        "Current Location",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(width: 2),
-                      Icon(Icons.keyboard_arrow_down, size: 20),
-                    ],
-                  ),
-                  const SizedBox(height: 2),
-                  const Text(
-                    "Tambaram, Chennai",
-                    style: TextStyle(fontSize: 13, color: Colors.black54),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-
-        // PROFILE ICON
-        GestureDetector(
-          onTap: () => Navigator.pushNamed(context, "/profile"),
-          child: const CircleAvatar(
-            radius: 22,
-            backgroundColor: Color(0xFFFFA000),
-            child: Icon(Icons.person, color: Colors.white, size: 26),
-          ),
-        ),
-      ],
-    );
-  }
-
-  // ---------------- SEARCH ----------------
-
+  // ---------- SEARCH BAR ----------
   Widget _searchBar() {
     return TextField(
       decoration: InputDecoration(
@@ -120,28 +132,27 @@ class HomeScreen extends StatelessWidget {
         filled: true,
         fillColor: Colors.grey.shade200,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide.none,
         ),
       ),
     );
   }
 
-  // ---------------- PROMO ----------------
-
+  // ---------- PROMO ----------
   Widget _promoBanner() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
-      child: SizedBox(
+      child: Image.asset(
+        "assets/images/promo.png",
         height: 160,
         width: double.infinity,
-        child: Image.asset("assets/images/promo.png", fit: BoxFit.cover),
+        fit: BoxFit.cover,
       ),
     );
   }
 
-  // ---------------- CATEGORIES ----------------
-
+  // ---------- CATEGORIES ----------
   Widget _categoryList(BuildContext context) {
     return SizedBox(
       height: 90,
@@ -150,7 +161,6 @@ class HomeScreen extends StatelessWidget {
         itemCount: dummyCategories.length,
         itemBuilder: (context, index) {
           final category = dummyCategories[index];
-
           return CategoryItem(
             category: category,
             onTap: () {
@@ -162,8 +172,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // ---------------- POPULAR RESTAURANTS ----------------
-
+  // ---------- RESTAURANTS ----------
   Widget _popularRestaurants() {
     return Column(
       children: List.generate(3, (index) {
@@ -172,24 +181,19 @@ class HomeScreen extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
-            boxShadow: const [
-              BoxShadow(color: Colors.black12, blurRadius: 5, spreadRadius: 2),
-            ],
+            boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 5)],
           ),
           child: Row(
             children: [
-              Container(
-                width: 110,
-                height: 110,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    bottomLeft: Radius.circular(16),
-                  ),
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/Pumpkin.webp"),
-                    fit: BoxFit.cover,
-                  ),
+              ClipRRect(
+                borderRadius: const BorderRadius.horizontal(
+                  left: Radius.circular(16),
+                ),
+                child: Image.asset(
+                  "assets/images/Pumpkin.webp",
+                  width: 110,
+                  height: 110,
+                  fit: BoxFit.cover,
                 ),
               ),
               const SizedBox(width: 12),
@@ -207,10 +211,7 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(height: 6),
                     Text("Alwarpet", style: TextStyle(color: Colors.black54)),
                     SizedBox(height: 6),
-                    Text(
-                      "4.5 • 20-25 min",
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
+                    Text("4.5 • 20-25 min"),
                   ],
                 ),
               ),
@@ -219,5 +220,38 @@ class HomeScreen extends StatelessWidget {
         );
       }),
     );
+  }
+}
+
+// ---------- SLIVER DELEGATE ----------
+class SearchBarSliverDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+  final double height;
+
+  SearchBarSliverDelegate({required this.child, required this.height});
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      alignment: Alignment.center,
+      child: child,
+    );
+  }
+
+  @override
+  double get maxExtent => height;
+
+  @override
+  double get minExtent => height;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
   }
 }

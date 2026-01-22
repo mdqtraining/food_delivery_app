@@ -1,6 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hunger_hub/uttils/dark_theme.dart';
+import 'package:hunger_hub/uttils/ligth_theme.dart';
+import 'package:hunger_hub/uttils/shared_preffrence.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Auth/auth_gate.dart';
 
@@ -47,11 +51,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Hunger Hub',
-      theme: ThemeData(
-        primaryColor: const Color(0xFFFFA000),
-        scaffoldBackgroundColor: Colors.white,
-        fontFamily: 'Poppins',
-      ),
+      theme: SharedPreffrencerhelper.getTheme() == true ? darkthem : lightthem,
 
       // AUTH FLOW ENTRY POINT
       home: const AuthGate(),
