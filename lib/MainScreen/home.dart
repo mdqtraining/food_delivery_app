@@ -10,11 +10,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       body: CustomScrollView(
         slivers: [
           // ---------- COLLAPSING LOCATION + PROFILE ----------
           SliverAppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).primaryColor,
             elevation: 0,
             pinned: false,
             expandedHeight: 0,
@@ -37,7 +38,7 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.location_on,
-                            color: Theme.of(context).primaryColor,
+                            color: primaryOrange,
                             size: 28,
                           ),
                           const SizedBox(width: 6),
